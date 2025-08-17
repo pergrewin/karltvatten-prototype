@@ -89,32 +89,36 @@ const App = () => {
     }
   };
 
-  return <div className="bg-gray-50 min-h-screen font-sans">{renderView()}</div>;
+  return <div className="bg-slate-50 min-h-screen font-sans">{renderView()}</div>;
 };
 
 
 // --- INLOGGNINGSSIDA ---
 const LoginPage = ({ setView }) => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-slate-50 p-4">
       <div className="text-center mb-12">
-        <h1 className="text-5xl font-bold text-gray-800">Kärltvätt AB</h1>
-        <p className="text-xl text-gray-500 mt-2">Bokningssystem</p>
+        <img 
+          src="https://karltvatten.se/wp-content/uploads/2023/11/karltvatten.png" 
+          alt="Kärltvätten Logotyp" 
+          className="mx-auto h-24 w-auto mb-4" 
+        />
+        <p className="text-xl text-slate-500 mt-2">Bokningssystem</p>
       </div>
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-sm">
-        <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">Välj inloggning</h2>
+      <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-sm">
+        <h2 className="text-2xl font-semibold text-center text-slate-700 mb-6">Logga in</h2>
         <div className="space-y-4">
           <button 
             onClick={() => setView('admin')}
-            className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
+            className="w-full bg-green-600 text-white py-3 px-4 rounded-xl font-semibold text-lg hover:bg-green-700 transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-200"
           >
-            Logga in som Admin
+            Admin
           </button>
           <button 
             onClick={() => setView('driver')}
-            className="w-full bg-gray-700 text-white py-3 px-4 rounded-lg font-semibold text-lg hover:bg-gray-800 transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gray-300"
+            className="w-full bg-slate-700 text-white py-3 px-4 rounded-xl font-semibold text-lg hover:bg-slate-800 transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-slate-300"
           >
-            Logga in som Förare
+            Förare
           </button>
         </div>
       </div>
@@ -127,20 +131,20 @@ const AdminPanel = ({ goToLogin, customers, setCustomers, drivers, jobs, setJobs
   const [activeTab, setActiveTab] = useState('bookings'); 
 
   return (
-    <div className="flex flex-col h-screen">
-      <header className="bg-white border-b shadow-sm">
+    <div className="flex flex-col h-screen bg-slate-50">
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-20">
         <div className="max-w-4xl mx-auto flex justify-between items-center p-4">
-            <h1 className="text-2xl font-bold text-gray-800">Adminpanel</h1>
+            <h1 className="text-xl font-bold text-green-700">Adminpanel</h1>
             <button 
               onClick={goToLogin}
-              className="bg-red-500 text-white py-2 px-5 rounded-lg font-semibold hover:bg-red-600 transition"
+              className="text-sm font-semibold text-slate-600 hover:text-slate-900"
             >
               Logga ut
             </button>
         </div>
       </header>
       
-      <nav className="bg-white border-b">
+      <nav className="bg-white border-b border-slate-200 sticky top-[65px] z-20">
         <div className="max-w-4xl mx-auto px-4">
           <div className="flex items-center space-x-4">
             <AdminTabButton label="Bokningar" isActive={activeTab === 'bookings'} onClick={() => setActiveTab('bookings')} />
@@ -150,7 +154,7 @@ const AdminPanel = ({ goToLogin, customers, setCustomers, drivers, jobs, setJobs
         </div>
       </nav>
 
-      <main className="flex-1 overflow-y-auto bg-gray-50 p-4 sm:p-6 md:p-8">
+      <main className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8">
         <div className="max-w-4xl mx-auto">
             {activeTab === 'bookings' && <BookingView jobs={jobs} setJobs={setJobs} customers={customers} drivers={drivers}/>}
             {activeTab === 'customers' && <CustomerView customers={customers} setCustomers={setCustomers} jobs={jobs} setJobs={setJobs} drivers={drivers} />}
@@ -164,7 +168,7 @@ const AdminPanel = ({ goToLogin, customers, setCustomers, drivers, jobs, setJobs
 const AdminTabButton = ({ label, isActive, onClick }) => (
   <button 
     onClick={onClick}
-    className={`py-3 px-2 font-semibold transition-colors duration-200 ${isActive ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 hover:text-gray-800'}`}
+    className={`py-3 px-1 font-semibold transition-colors duration-200 border-b-2 ${isActive ? 'border-green-600 text-green-700' : 'border-transparent text-slate-500 hover:text-slate-800'}`}
   >
     {label}
   </button>
@@ -245,20 +249,20 @@ const CustomerListView = ({ customers, setCustomers, onCustomerClick }) => {
   return (
     <div>
       <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-4">
-        <h2 className="text-3xl font-bold text-gray-800">Kundöversikt</h2>
+        <h2 className="text-3xl font-bold text-slate-800">Kundöversikt</h2>
         <button 
           onClick={() => setIsAddModalOpen(true)}
-          className="flex items-center justify-center bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition w-full sm:w-auto"
+          className="flex items-center justify-center bg-green-600 text-white py-2 px-4 rounded-xl font-semibold hover:bg-green-700 transition w-full sm:w-auto"
         >
           <PlusCircle className="w-5 h-5 mr-2" />
           Lägg till ny kund
         </button>
       </div>
-      <div className="bg-white rounded-xl shadow-md">
+      <div className="bg-white rounded-xl shadow-sm">
         <div className="overflow-x-auto">
           <table className="min-w-full text-left">
-            <thead className="sticky top-0 bg-gray-50 z-10 shadow-sm">
-              <tr className="border-b text-sm text-gray-500 uppercase">
+            <thead className="sticky top-0 bg-slate-50 z-10">
+              <tr className="border-b border-slate-200 text-sm text-slate-500 uppercase">
                 <th className="p-4">Kund</th>
                 <th className="p-4">Aktiv</th>
                 <th className="p-4">Stadsdel</th>
@@ -268,11 +272,11 @@ const CustomerListView = ({ customers, setCustomers, onCustomerClick }) => {
             <tbody>
               {customers.length > 0 ? (
                 customers.map(customer => (
-                  <tr key={customer.id} className="border-b hover:bg-gray-50 group">
+                  <tr key={customer.id} className="border-b border-slate-200 hover:bg-slate-50 group">
                     <td className="p-4">
                       <button onClick={() => onCustomerClick(customer.id)} className="text-left w-full">
-                        <p className="font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">{customer.name}</p>
-                        <p className="text-sm text-gray-500">{customer.address}</p>
+                        <p className="font-semibold text-slate-800 group-hover:text-green-600 transition-colors">{customer.name}</p>
+                        <p className="text-sm text-slate-500">{customer.address}</p>
                       </button>
                     </td>
                     <td className="p-4">
@@ -280,7 +284,7 @@ const CustomerListView = ({ customers, setCustomers, onCustomerClick }) => {
                         {customer.isActive ? 'Ja' : 'Nej'}
                       </span>
                     </td>
-                    <td className="p-4 text-gray-600">{customer.city}</td>
+                    <td className="p-4 text-slate-600">{customer.city}</td>
                     <td className="p-4 text-right align-top">
                       <ActionsDropdown 
                         onEdit={() => setCustomerToEdit(customer)}
@@ -291,7 +295,7 @@ const CustomerListView = ({ customers, setCustomers, onCustomerClick }) => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="4" className="text-center p-8 text-gray-500">
+                  <td colSpan="4" className="text-center p-8 text-slate-500">
                     Inga kunder hittades.
                   </td>
                 </tr>
@@ -315,13 +319,13 @@ const CustomerDetailView = ({ customer, jobs, drivers, onBack, onDuplicateJob })
 
     return (
         <div>
-            <button onClick={onBack} className="flex items-center text-gray-600 hover:text-gray-900 mb-6 font-semibold">
+            <button onClick={onBack} className="flex items-center text-slate-600 hover:text-slate-900 mb-6 font-semibold">
                 <ArrowLeft className="w-5 h-5 mr-2" />
                 Tillbaka till kundöversikt
             </button>
             
-            <div className="bg-white rounded-xl shadow-md p-6 mb-8">
-                <h2 className="text-3xl font-bold text-gray-800 mb-4">{customer.name}</h2>
+            <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
+                <h2 className="text-3xl font-bold text-slate-800 mb-4">{customer.name}</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <InfoSection title="Kontaktuppgifter">
                         <InfoRow icon={User} label="Kontaktperson" value={customer.contactPerson} />
@@ -335,31 +339,31 @@ const CustomerDetailView = ({ customer, jobs, drivers, onBack, onDuplicateJob })
                         <InfoRow icon={Trash2} label="Standardantal kärl" value={customer.binCount} />
                          <InfoRow icon={Building} label="Standardantal soprum" value={customer.roomCount} />
                     </InfoSection>
-                    <div className="bg-blue-50 p-4 rounded-lg">
-                        <h4 className="text-lg font-semibold text-gray-700 mb-2">Kommande tvätt</h4>
+                    <div className="bg-green-50 p-4 rounded-lg">
+                        <h4 className="text-lg font-semibold text-slate-700 mb-2">Kommande tvätt</h4>
                         {upcomingJob ? (
                             <div>
-                                <p className="font-bold text-blue-800 text-xl">{new Date(upcomingJob.scheduledDate).toLocaleDateString('sv-SE', { day: 'numeric', month: 'long' })}</p>
-                                <p className="text-sm text-gray-600">Förare: {getDriverById(drivers, upcomingJob.driverId).name}</p>
+                                <p className="font-bold text-green-800 text-xl">{new Date(upcomingJob.scheduledDate).toLocaleDateString('sv-SE', { day: 'numeric', month: 'long' })}</p>
+                                <p className="text-sm text-slate-600">Förare: {getDriverById(drivers, upcomingJob.driverId).name}</p>
                             </div>
                         ) : (
-                            <p className="text-gray-500">Ingen kommande tvätt inbokad.</p>
+                            <p className="text-slate-500">Ingen kommande tvätt inbokad.</p>
                         )}
                     </div>
                 </div>
             </div>
 
             <div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">Bokningshistorik</h3>
-                <div className="bg-white rounded-xl shadow-md p-6">
+                <h3 className="text-2xl font-bold text-slate-800 mb-4">Bokningshistorik</h3>
+                <div className="bg-white rounded-xl shadow-sm p-6">
                     <div className="space-y-4">
                         {jobs.length > 0 ? (
                             [...jobs].sort((a,b) => new Date(b.scheduledDate) - new Date(a.scheduledDate)).map(job => (
-                                <div key={job.id} className="p-3 border rounded-lg flex justify-between items-center">
+                                <div key={job.id} className="p-3 border border-slate-200 rounded-lg flex justify-between items-center">
                                     <div className="flex-1">
                                         <p className="font-semibold">{new Date(job.scheduledDate).toLocaleDateString('sv-SE')}</p>
-                                        <p className="text-sm text-gray-500">Förare: {getDriverById(drivers, job.driverId).name}</p>
-                                        <p className="text-sm text-gray-500">Kärl: {job.binCount}, Soprum: {job.roomCount}, Städ: {job.roomCleaning ? 'Ja' : 'Nej'}</p>
+                                        <p className="text-sm text-slate-500">Förare: {getDriverById(drivers, job.driverId).name}</p>
+                                        <p className="text-sm text-slate-500">Kärl: {job.binCount}, Soprum: {job.roomCount}, Städ: {job.roomCleaning ? 'Ja' : 'Nej'}</p>
                                     </div>
                                     <div className="text-right mx-4">
                                         <span className={`px-2 py-1 text-xs font-semibold rounded-full ${job.status === 'completed' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}>
@@ -367,13 +371,13 @@ const CustomerDetailView = ({ customer, jobs, drivers, onBack, onDuplicateJob })
                                         </span>
                                         <p className="font-semibold mt-1">{job.binPrice + job.cleaningPrice} kr</p>
                                     </div>
-                                    <button onClick={() => onDuplicateJob(job)} className="p-2 rounded-full hover:bg-gray-200" title="Duplicera jobb">
-                                        <Copy className="w-5 h-5 text-gray-500" />
+                                    <button onClick={() => onDuplicateJob(job)} className="p-2 rounded-full hover:bg-slate-100" title="Duplicera jobb">
+                                        <Copy className="w-5 h-5 text-slate-500" />
                                     </button>
                                 </div>
                             ))
                         ) : (
-                            <p className="text-gray-500">Ingen bokningshistorik.</p>
+                            <p className="text-slate-500">Ingen bokningshistorik.</p>
                         )}
                     </div>
                 </div>
@@ -402,16 +406,16 @@ const ActionsDropdown = ({ onEdit, onDelete }) => {
         <div className="relative inline-block text-left" ref={menuRef}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-2 rounded-full hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition"
+                className="p-2 rounded-full hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition"
             >
-                <MoreHorizontal className="w-5 h-5 text-gray-600" />
+                <MoreHorizontal className="w-5 h-5 text-slate-600" />
             </button>
             {isOpen && (
                 <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-20">
                     <div className="py-1">
                         <button
                             onClick={() => { onEdit(); setIsOpen(false); }}
-                            className="w-full text-left flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            className="w-full text-left flex items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
                         >
                             <Edit className="w-4 h-4 mr-3" /> Redigera
                         </button>
@@ -469,7 +473,7 @@ const CustomerModal = ({ mode, customer, onSave, onClose }) => {
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg">
         <form onSubmit={handleSubmit}>
           <div className="p-6 border-b">
-            <h3 className="text-2xl font-bold text-gray-800">{isEditMode ? 'Redigera kund' : 'Lägg till ny kund'}</h3>
+            <h3 className="text-2xl font-bold text-slate-800">{isEditMode ? 'Redigera kund' : 'Lägg till ny kund'}</h3>
           </div>
           <div className="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
             <InputField label="BRF-namn" name="name" value={formData.name} onChange={handleChange} required />
@@ -491,13 +495,13 @@ const CustomerModal = ({ mode, customer, onSave, onClose }) => {
             </div>
             <InputField label="Anteckningar (Nyckel-ID/Portkod etc.)" name="notes" isTextarea={true} value={formData.notes} onChange={handleChange} />
             <div className="flex items-center">
-                <input type="checkbox" id="isActive" name="isActive" checked={formData.isActive} onChange={handleChange} className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
-                <label htmlFor="isActive" className="ml-2 block text-sm text-gray-900">Aktiv kund</label>
+                <input type="checkbox" id="isActive" name="isActive" checked={formData.isActive} onChange={handleChange} className="h-4 w-4 text-green-600 border-slate-300 rounded focus:ring-green-500" />
+                <label htmlFor="isActive" className="ml-2 block text-sm text-slate-900">Aktiv kund</label>
             </div>
           </div>
-          <div className="flex justify-end items-center p-4 bg-gray-50 rounded-b-2xl gap-3">
-            <button type="button" onClick={onClose} className="py-2 px-4 bg-gray-200 text-gray-800 font-semibold rounded-lg hover:bg-gray-300 transition">Avbryt</button>
-            <button type="submit" className="py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition flex items-center">
+          <div className="flex justify-end items-center p-4 bg-slate-50 rounded-b-2xl gap-3">
+            <button type="button" onClick={onClose} className="py-2 px-4 bg-slate-200 text-slate-800 font-semibold rounded-lg hover:bg-slate-300 transition">Avbryt</button>
+            <button type="submit" className="py-2 px-4 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition flex items-center">
               <Save className="w-5 h-5 mr-2"/>Spara kund
             </button>
           </div>
@@ -516,13 +520,13 @@ const DeleteConfirmationModal = ({ customer, onConfirm, onCancel }) => {
             <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
                 <AlertTriangle className="h-6 w-6 text-red-600" />
             </div>
-            <h3 className="text-xl font-bold text-gray-800 mt-4">Ta bort kund</h3>
-            <p className="text-gray-600 mt-2">
+            <h3 className="text-xl font-bold text-slate-800 mt-4">Ta bort kund</h3>
+            <p className="text-slate-600 mt-2">
                 Är du säker på att du vill ta bort <span className="font-semibold">{customer.name}</span>? Denna åtgärd kan inte ångras.
             </p>
         </div>
-        <div className="flex justify-center items-center p-4 bg-gray-50 rounded-b-2xl gap-3">
-          <button onClick={onCancel} className="py-2 px-6 bg-gray-200 text-gray-800 font-semibold rounded-lg hover:bg-gray-300 transition">
+        <div className="flex justify-center items-center p-4 bg-slate-50 rounded-b-2xl gap-3">
+          <button onClick={onCancel} className="py-2 px-6 bg-slate-200 text-slate-800 font-semibold rounded-lg hover:bg-slate-300 transition">
             Avbryt
           </button>
           <button onClick={onConfirm} className="py-2 px-6 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition flex items-center">
@@ -536,11 +540,11 @@ const DeleteConfirmationModal = ({ customer, onConfirm, onCancel }) => {
 
 const InputField = ({ label, name, type = 'text', value, onChange, required, isTextarea, placeholder }) => (
     <div>
-        <label htmlFor={name} className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+        <label htmlFor={name} className="block text-sm font-medium text-slate-700 mb-1">{label}</label>
         {isTextarea ? (
-            <textarea id={name} name={name} value={value} onChange={onChange} required={required} placeholder={placeholder} rows="3" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"></textarea>
+            <textarea id={name} name={name} value={value} onChange={onChange} required={required} placeholder={placeholder} rows="3" className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"></textarea>
         ) : (
-            <input type={type} id={name} name={name} value={value} onChange={onChange} required={required} placeholder={placeholder} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" />
+            <input type={type} id={name} name={name} value={value} onChange={onChange} required={required} placeholder={placeholder} className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition" />
         )}
     </div>
 );
@@ -575,10 +579,10 @@ const BookingView = ({ jobs, setJobs, customers, drivers }) => {
   return (
     <div>
       <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-4">
-        <h2 className="text-3xl font-bold text-gray-800">Bokningskalender</h2>
+        <h2 className="text-3xl font-bold text-slate-800">Bokningskalender</h2>
         <button 
           onClick={() => setIsAddJobModalOpen(true)}
-          className="flex items-center justify-center bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition w-full sm:w-auto"
+          className="flex items-center justify-center bg-green-600 text-white py-2 px-4 rounded-xl font-semibold hover:bg-green-700 transition w-full sm:w-auto"
         >
           <PlusCircle className="w-5 h-5 mr-2" />
           Lägg till jobb
@@ -586,15 +590,15 @@ const BookingView = ({ jobs, setJobs, customers, drivers }) => {
       </div>
 
       <div className="space-y-8">
-        <div className="bg-white p-6 rounded-xl shadow-md">
+        <div className="bg-white p-6 rounded-xl shadow-sm">
           <CalendarComponent 
             selectedDate={selectedDate} 
             setSelectedDate={setSelectedDate}
             jobs={jobs}
           />
         </div>
-        <div className="bg-white p-6 rounded-xl shadow-md">
-          <h3 className="text-xl font-semibold mb-4 text-gray-800">
+        <div className="bg-white p-6 rounded-xl shadow-sm">
+          <h3 className="text-xl font-semibold mb-4 text-slate-800">
             Jobb för {selectedDate.toLocaleDateString('sv-SE', { weekday: 'long', day: 'numeric', month: 'long' })}
           </h3>
           
@@ -610,7 +614,7 @@ const BookingView = ({ jobs, setJobs, customers, drivers }) => {
           <div className="space-y-4">
             {jobsForSelectedDate.length > 0 
               ? jobsForSelectedDate.map(job => <JobListItem key={job.id} job={job} customers={customers} drivers={drivers} onJobClick={() => setViewingJob(job)} />) 
-              : <p className="text-gray-500 text-center mt-8">Inga uppdrag för detta datum.</p>
+              : <p className="text-slate-500 text-center mt-8">Inga uppdrag för detta datum.</p>
             }
           </div>
         </div>
@@ -639,10 +643,10 @@ const BookingView = ({ jobs, setJobs, customers, drivers }) => {
 };
 
 const DailySummaryCard = ({ icon: Icon, title, value }) => (
-    <div className="bg-gray-50 p-4 rounded-lg">
-        <Icon className="w-6 h-6 text-gray-500 mx-auto mb-2" />
-        <p className="text-sm text-gray-600">{title}</p>
-        <p className="text-xl font-bold text-gray-800">{value}</p>
+    <div className="bg-slate-50 p-4 rounded-lg">
+        <Icon className="w-6 h-6 text-slate-500 mx-auto mb-2" />
+        <p className="text-sm text-slate-600">{title}</p>
+        <p className="text-xl font-bold text-slate-800">{value}</p>
     </div>
 );
 
@@ -685,23 +689,23 @@ const CalendarComponent = ({ selectedDate, setSelectedDate, jobs }) => {
     return (
         <div>
             <div className="flex justify-between items-center mb-4">
-                <button onClick={() => changeMonth(-1)} className="p-2 rounded-full hover:bg-gray-100"><ChevronLeft /></button>
+                <button onClick={() => changeMonth(-1)} className="p-2 rounded-full hover:bg-slate-100"><ChevronLeft /></button>
                 <h3 className="text-xl font-semibold">{currentMonth.toLocaleDateString('sv-SE', { month: 'long', year: 'numeric' })}</h3>
-                <button onClick={() => changeMonth(1)} className="p-2 rounded-full hover:bg-gray-100"><ChevronRight /></button>
+                <button onClick={() => changeMonth(1)} className="p-2 rounded-full hover:bg-slate-100"><ChevronRight /></button>
             </div>
             <div className="flex">
-                <div className="w-8 text-center text-sm text-gray-500 mb-2 flex flex-col justify-around">
+                <div className="w-8 text-center text-sm text-slate-500 mb-2 flex flex-col justify-around">
                     <div></div> {/* Empty corner */}
                     {weeks.map((week, weekIndex) => {
                         const firstDayOfWeek = week.find(d => d !== null);
                         if (firstDayOfWeek === undefined) return <div key={weekIndex} className="h-12"></div>;
                         const weekDate = new Date(year, month, firstDayOfWeek);
                         const weekNumber = getWeekNumber(weekDate);
-                        return <div key={weekIndex} className="h-12 flex items-center justify-center text-xs text-gray-400">{weekNumber}</div>
+                        return <div key={weekIndex} className="h-12 flex items-center justify-center text-xs text-slate-400">{weekNumber}</div>
                     })}
                 </div>
-                <div className="flex-1 border-l border-gray-200 ml-2 pl-2">
-                    <div className="grid grid-cols-7 gap-1 text-center text-sm text-gray-500 mb-2">
+                <div className="flex-1 border-l border-slate-200 ml-2 pl-2">
+                    <div className="grid grid-cols-7 gap-1 text-center text-sm text-slate-500 mb-2">
                         {['M', 'T', 'O', 'T', 'F', 'L', 'S'].map((day, index) => <div key={index}>{day}</div>)}
                     </div>
                     <div className="grid grid-cols-1 gap-1">
@@ -719,7 +723,7 @@ const CalendarComponent = ({ selectedDate, setSelectedDate, jobs }) => {
                                         <div key={`${weekIndex}-${dayIndex}`} className="relative">
                                             <button
                                                 onClick={() => setSelectedDate(date)}
-                                                className={`w-full h-12 rounded-lg transition-colors flex items-center justify-center ${isSelected ? 'bg-blue-500 text-white' : 'hover:bg-gray-100'}`}
+                                                className={`w-full h-12 rounded-lg transition-colors flex items-center justify-center ${isSelected ? 'bg-green-600 text-white' : 'hover:bg-slate-100'}`}
                                             >
                                                 {day}
                                                 {indicatorColor && <div className={`absolute bottom-1.5 left-1/2 -translate-x-1/2 w-2 h-2 ${indicatorColor} rounded-full`}></div>}
@@ -792,12 +796,12 @@ const AddJobModal = ({ onSave, onClose, customers, drivers, initialDate, initial
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg">
         <form onSubmit={handleSubmit}>
           <div className="p-6 border-b">
-            <h3 className="text-2xl font-bold text-gray-800">{initialJobData ? 'Duplicera jobb' : 'Lägg till nytt jobb'}</h3>
+            <h3 className="text-2xl font-bold text-slate-800">{initialJobData ? 'Duplicera jobb' : 'Lägg till nytt jobb'}</h3>
           </div>
           <div className="p-6 space-y-4">
             <div>
-              <label htmlFor="customerId" className="block text-sm font-medium text-gray-700 mb-1">Kund</label>
-              <select id="customerId" name="customerId" value={formData.customerId} onChange={handleChange} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+              <label htmlFor="customerId" className="block text-sm font-medium text-slate-700 mb-1">Kund</label>
+              <select id="customerId" name="customerId" value={formData.customerId} onChange={handleChange} className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition">
                 {customers.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
               </select>
             </div>
@@ -807,23 +811,23 @@ const AddJobModal = ({ onSave, onClose, customers, drivers, initialDate, initial
             </div>
             <InputField label="Pris Kärl (SEK)" name="binPrice" type="number" value={formData.binPrice} onChange={handleChange} />
             <div className="flex items-center">
-                <input type="checkbox" id="roomCleaning" name="roomCleaning" checked={formData.roomCleaning} onChange={handleChange} className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
-                <label htmlFor="roomCleaning" className="ml-2 block text-sm font-medium text-gray-700">Städ av soprum</label>
+                <input type="checkbox" id="roomCleaning" name="roomCleaning" checked={formData.roomCleaning} onChange={handleChange} className="h-4 w-4 text-green-600 border-slate-300 rounded focus:ring-green-500" />
+                <label htmlFor="roomCleaning" className="ml-2 block text-sm font-medium text-slate-700">Städ av soprum</label>
             </div>
             {formData.roomCleaning && (
                 <InputField label="Pris Städning (SEK)" name="cleaningPrice" type="number" value={formData.cleaningPrice} onChange={handleChange} />
             )}
             <div>
-              <label htmlFor="driverId" className="block text-sm font-medium text-gray-700 mb-1">Förare</label>
-              <select id="driverId" name="driverId" value={formData.driverId} onChange={handleChange} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+              <label htmlFor="driverId" className="block text-sm font-medium text-slate-700 mb-1">Förare</label>
+              <select id="driverId" name="driverId" value={formData.driverId} onChange={handleChange} className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition">
                 {drivers.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
               </select>
             </div>
             <InputField label="Datum" name="scheduledDate" type="date" value={formData.scheduledDate} onChange={handleChange} required />
           </div>
-          <div className="flex justify-end items-center p-4 bg-gray-50 rounded-b-2xl gap-3">
-            <button type="button" onClick={onClose} className="py-2 px-4 bg-gray-200 text-gray-800 font-semibold rounded-lg hover:bg-gray-300 transition">Avbryt</button>
-            <button type="submit" className="py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition flex items-center">
+          <div className="flex justify-end items-center p-4 bg-slate-50 rounded-b-2xl gap-3">
+            <button type="button" onClick={onClose} className="py-2 px-4 bg-slate-200 text-slate-800 font-semibold rounded-lg hover:bg-slate-300 transition">Avbryt</button>
+            <button type="submit" className="py-2 px-4 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition flex items-center">
               <Save className="w-5 h-5 mr-2"/>Spara jobb
             </button>
           </div>
@@ -860,8 +864,8 @@ const JobDetailsModal = ({ job, customer, driver, onClose }) => {
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg">
                 <div className="p-6 border-b flex justify-between items-start">
                     <div>
-                        <h3 className="text-2xl font-bold text-gray-800">{customer.name}</h3>
-                        <p className="text-gray-500">{new Date(job.scheduledDate).toLocaleDateString('sv-SE', { weekday: 'long', day: 'numeric', month: 'long' })}</p>
+                        <h3 className="text-2xl font-bold text-slate-800">{customer.name}</h3>
+                        <p className="text-slate-500">{new Date(job.scheduledDate).toLocaleDateString('sv-SE', { weekday: 'long', day: 'numeric', month: 'long' })}</p>
                     </div>
                     <span className={`px-3 py-1 text-sm font-semibold rounded-full ${style.bgColor} ${style.textColor}`}>{style.text}</span>
                 </div>
@@ -882,8 +886,8 @@ const JobDetailsModal = ({ job, customer, driver, onClose }) => {
                         {job.driverNotes && <InfoRow icon={MessageSquare} label="Anteckningar (förare)" value={job.driverNotes} />}
                     </InfoSection>
                 </div>
-                <div className="flex justify-end items-center p-4 bg-gray-50 rounded-b-2xl">
-                    <button onClick={onClose} className="py-2 px-4 bg-gray-200 text-gray-800 font-semibold rounded-lg hover:bg-gray-300 transition">Stäng</button>
+                <div className="flex justify-end items-center p-4 bg-slate-50 rounded-b-2xl">
+                    <button onClick={onClose} className="py-2 px-4 bg-slate-200 text-slate-800 font-semibold rounded-lg hover:bg-slate-300 transition">Stäng</button>
                 </div>
             </div>
         </div>
@@ -892,17 +896,17 @@ const JobDetailsModal = ({ job, customer, driver, onClose }) => {
 
 const InfoSection = ({ title, children }) => (
     <div>
-        <h4 className="text-lg font-semibold text-gray-700 mb-2 border-b pb-1">{title}</h4>
+        <h4 className="text-lg font-semibold text-slate-700 mb-2 border-b pb-1">{title}</h4>
         <div className="space-y-2">{children}</div>
     </div>
 );
 
 const InfoRow = ({ icon: Icon, label, value }) => (
     <div className="flex items-start">
-        <Icon className="w-5 h-5 text-gray-500 mr-3 mt-1 flex-shrink-0" />
+        <Icon className="w-5 h-5 text-slate-500 mr-3 mt-1 flex-shrink-0" />
         <div>
-            <p className="font-semibold text-gray-800">{label}</p>
-            <p className="text-gray-600">{value}</p>
+            <p className="font-semibold text-slate-800">{label}</p>
+            <p className="text-slate-600">{value}</p>
         </div>
     </div>
 );
@@ -934,12 +938,12 @@ const JobListItem = ({ job, customers, drivers, onJobClick }) => {
     <button onClick={onJobClick} className={`w-full text-left p-4 rounded-lg border-l-4 ${style.borderColor} ${style.bgColor} shadow-sm hover:shadow-md transition-shadow`}>
       <div className="flex justify-between items-start">
         <div className="flex-1 space-y-1 pr-4 min-w-0">
-          <p className="font-bold text-lg text-gray-900 truncate">{customer.name}</p>
-          <div className="flex items-center text-sm text-gray-600">
+          <p className="font-bold text-lg text-slate-900 truncate">{customer.name}</p>
+          <div className="flex items-center text-sm text-slate-600">
             <MapPin className="w-4 h-4 mr-2 flex-shrink-0" />
             <span className="truncate">{customer.address}</span>
           </div>
-          <div className="flex items-center text-sm text-gray-600">
+          <div className="flex items-center text-sm text-slate-600">
             <User className="w-4 h-4 mr-2 flex-shrink-0" />
             <span className="whitespace-nowrap">Förare: {driver.name}</span>
           </div>
@@ -949,7 +953,7 @@ const JobListItem = ({ job, customers, drivers, onJobClick }) => {
         </div>
       </div>
       {job.driverNotes && (
-        <div className="mt-3 pt-3 border-t border-gray-200 flex items-start text-sm text-gray-700">
+        <div className="mt-3 pt-3 border-t border-slate-200 flex items-start text-sm text-slate-700">
           <MessageSquare className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
           <p><strong>Förarens anteckning:</strong> {job.driverNotes}</p>
         </div>
@@ -971,20 +975,20 @@ const DriverView = ({ goToLogin, drivers, jobs, setJobs, customers }) => {
   
   if (!selectedDriver) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">Vem är du?</h1>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-slate-100 p-4">
+        <h1 className="text-3xl font-bold text-slate-800 mb-6 text-center">Vem är du?</h1>
         <div className="w-full max-w-xs space-y-4">
           {drivers.map(driver => (
             <button 
               key={driver.id} 
               onClick={() => setSelectedDriver(driver)}
-              className="w-full bg-white text-gray-800 py-4 px-6 rounded-xl shadow-md font-semibold text-lg hover:bg-blue-500 hover:text-white transition-all transform hover:scale-105"
+              className="w-full bg-white text-slate-800 py-4 px-6 rounded-xl shadow-md font-semibold text-lg hover:bg-green-600 hover:text-white transition-all transform hover:scale-105"
             >
               {driver.name}
             </button>
           ))}
         </div>
-        <button onClick={goToLogin} className="mt-8 text-gray-600 hover:text-gray-800 font-semibold">Tillbaka</button>
+        <button onClick={goToLogin} className="mt-8 text-slate-600 hover:text-slate-800 font-semibold">Tillbaka</button>
       </div>
     );
   }
@@ -1004,30 +1008,30 @@ const DriverView = ({ goToLogin, drivers, jobs, setJobs, customers }) => {
   return (
     <div className="w-full max-w-4xl mx-auto p-4">
        <header className="flex items-center justify-between mb-6">
-        <button onClick={() => setSelectedDriver(null)} className="flex items-center text-gray-600 hover:text-gray-900">
+        <button onClick={() => setSelectedDriver(null)} className="flex items-center text-slate-600 hover:text-slate-900">
           <ArrowLeft className="w-5 h-5 mr-2" />
           Byt förare
         </button>
-        <h1 className="text-2xl font-bold text-gray-800">{selectedDriver.name}</h1>
-        <User className="w-8 h-8 rounded-full bg-gray-700 text-white p-1.5" />
+        <h1 className="text-2xl font-bold text-slate-800">{selectedDriver.name}</h1>
+        <User className="w-8 h-8 rounded-full bg-slate-700 text-white p-1.5" />
       </header>
       
       <div className="space-y-8">
-        <div className="bg-white p-6 rounded-xl shadow-md">
+        <div className="bg-white p-6 rounded-xl shadow-sm">
           <CalendarComponent 
             selectedDate={selectedDate} 
             setSelectedDate={setSelectedDate}
             jobs={driverJobs}
           />
         </div>
-        <div className="bg-white p-6 rounded-xl shadow-md">
-          <h3 className="text-xl font-semibold mb-4 text-gray-800">
+        <div className="bg-white p-6 rounded-xl shadow-sm">
+          <h3 className="text-xl font-semibold mb-4 text-slate-800">
             Jobb för {selectedDate.toLocaleDateString('sv-SE', { weekday: 'long', day: 'numeric', month: 'long' })}
           </h3>
           <div className="space-y-4">
             {jobsForSelectedDate.length > 0 
               ? jobsForSelectedDate.map(job => <JobListItem key={job.id} job={job} customers={customers} drivers={drivers} onJobClick={() => setViewingJob(job)} />) 
-              : <p className="text-gray-500 text-center mt-8">Inga uppdrag för detta datum.</p>
+              : <p className="text-slate-500 text-center mt-8">Inga uppdrag för detta datum.</p>
             }
           </div>
         </div>
@@ -1064,8 +1068,8 @@ const DriverJobDetails = ({ job, customer, onBack, onUpdate }) => {
 
   const NumberDropdown = ({ label, value, onChange, max = 50 }) => (
     <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
-        <select value={value} onChange={onChange} disabled={!isBooked} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition disabled:bg-gray-100">
+        <label className="block text-sm font-medium text-slate-700 mb-1">{label}</label>
+        <select value={value} onChange={onChange} disabled={!isBooked} className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition disabled:bg-slate-100">
             {[...Array(max + 1).keys()].map(num => <option key={num} value={num}>{num}</option>)}
         </select>
     </div>
@@ -1074,7 +1078,7 @@ const DriverJobDetails = ({ job, customer, onBack, onUpdate }) => {
   return (
     <div className="w-full max-w-2xl mx-auto p-4 bg-white min-h-screen">
       <header className="flex items-center mb-6">
-        <button onClick={onBack} className="flex items-center text-gray-600 hover:text-gray-900 p-2 -ml-2">
+        <button onClick={onBack} className="flex items-center text-slate-600 hover:text-slate-900 p-2 -ml-2">
           <ArrowLeft className="w-6 h-6 mr-2" />
           <span className="font-semibold">Tillbaka till listan</span>
         </button>
@@ -1083,8 +1087,8 @@ const DriverJobDetails = ({ job, customer, onBack, onUpdate }) => {
       <div className="space-y-6">
         <div className="flex justify-between items-start">
             <div>
-                <h1 className="text-3xl font-bold text-gray-900">{customer.name}</h1>
-                <p className="text-lg text-gray-500">{new Date(job.scheduledDate).toLocaleDateString('sv-SE', { weekday: 'long', day: 'numeric', month: 'long' })}</p>
+                <h1 className="text-3xl font-bold text-slate-900">{customer.name}</h1>
+                <p className="text-lg text-slate-500">{new Date(job.scheduledDate).toLocaleDateString('sv-SE', { weekday: 'long', day: 'numeric', month: 'long' })}</p>
             </div>
             {isCompleted && (
                 <span className="mt-1 flex items-center bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">
@@ -1126,14 +1130,14 @@ const DriverJobDetails = ({ job, customer, onBack, onUpdate }) => {
 
         <div>
             <div className="flex justify-between items-center mb-2">
-                <label htmlFor="driverNotes" className="block text-lg font-semibold text-gray-700">Dina anteckningar</label>
+                <label htmlFor="driverNotes" className="block text-lg font-semibold text-slate-700">Dina anteckningar</label>
                 {(isCompleted || isFailed) && (
                     isEditing ? (
-                        <button onClick={handleSaveNotes} className="flex items-center text-sm text-blue-600 font-semibold hover:text-blue-800 p-2">
+                        <button onClick={handleSaveNotes} className="flex items-center text-sm text-green-600 font-semibold hover:text-green-800 p-2">
                             <Save className="w-4 h-4 mr-1" /> Spara
                         </button>
                     ) : (
-                        <button onClick={() => setIsEditing(true)} className="flex items-center text-sm text-gray-600 font-semibold hover:text-gray-800 p-2">
+                        <button onClick={() => setIsEditing(true)} className="flex items-center text-sm text-slate-600 font-semibold hover:text-slate-800 p-2">
                             <Edit className="w-4 h-4 mr-1" /> Ändra
                         </button>
                     )
@@ -1145,7 +1149,7 @@ const DriverJobDetails = ({ job, customer, onBack, onUpdate }) => {
                 readOnly={(isCompleted || isFailed) && !isEditing}
                 onChange={(e) => setDriverNotes(e.target.value)}
                 placeholder="Problem med nyckel, extra kärl etc."
-                className={`w-full p-3 border border-gray-300 rounded-lg h-28 focus:ring-2 focus:ring-blue-500 transition-colors ${(isCompleted || isFailed) && !isEditing ? 'bg-gray-100' : ''}`}
+                className={`w-full p-3 border border-slate-300 rounded-lg h-28 focus:ring-2 focus:ring-green-500 transition-colors ${(isCompleted || isFailed) && !isEditing ? 'bg-slate-100' : ''}`}
             />
         </div>
         
@@ -1192,26 +1196,26 @@ const EconomyView = ({ jobs, customers }) => {
 
     return (
         <div>
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">Ekonomiöversikt {currentYear}</h2>
+            <h2 className="text-3xl font-bold text-slate-800 mb-6">Ekonomiöversikt {currentYear}</h2>
             
-            <div className="bg-white p-6 rounded-xl shadow-md mb-8">
+            <div className="bg-white p-6 rounded-xl shadow-sm mb-8">
                 <div className="flex items-center">
                     <div className="p-3 rounded-full bg-green-100 text-green-600 mr-4">
                         <TrendingUp className="w-8 h-8" />
                     </div>
                     <div>
-                        <p className="text-lg text-gray-500">Total Omsättning (slutförda jobb)</p>
-                        <p className="text-4xl font-bold text-gray-800">{totalRevenue.toLocaleString('sv-SE')} kr</p>
+                        <p className="text-lg text-slate-500">Total Omsättning (slutförda jobb)</p>
+                        <p className="text-4xl font-bold text-slate-800">{totalRevenue.toLocaleString('sv-SE')} kr</p>
                     </div>
                 </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-md">
-                <h3 className="text-xl font-semibold p-6 border-b">Omsättning per kund</h3>
+            <div className="bg-white rounded-xl shadow-sm">
+                <h3 className="text-xl font-semibold p-6 border-b border-slate-200">Omsättning per kund</h3>
                 <div className="overflow-x-auto">
                     <table className="min-w-full text-left">
-                        <thead className="bg-gray-50">
-                            <tr className="text-sm text-gray-500 uppercase">
+                        <thead className="bg-slate-50">
+                            <tr className="text-sm text-slate-500 uppercase">
                                 <th className="p-4">Kund</th>
                                 <th className="p-4 text-right">Antal jobb</th>
                                 <th className="p-4 text-right">Total Omsättning</th>
@@ -1219,10 +1223,10 @@ const EconomyView = ({ jobs, customers }) => {
                         </thead>
                         <tbody>
                             {revenueByCustomer.map(customer => (
-                                <tr key={customer.id} className="border-b hover:bg-gray-50">
-                                    <td className="p-4 font-semibold text-gray-800">{customer.name}</td>
-                                    <td className="p-4 text-right text-gray-600">{customer.jobCount}</td>
-                                    <td className="p-4 text-right text-gray-800 font-semibold">{customer.revenue.toLocaleString('sv-SE')} kr</td>
+                                <tr key={customer.id} className="border-b border-slate-200 hover:bg-slate-50">
+                                    <td className="p-4 font-semibold text-slate-800">{customer.name}</td>
+                                    <td className="p-4 text-right text-slate-600">{customer.jobCount}</td>
+                                    <td className="p-4 text-right text-slate-800 font-semibold">{customer.revenue.toLocaleString('sv-SE')} kr</td>
                                 </tr>
                             ))}
                         </tbody>
